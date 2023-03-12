@@ -84,3 +84,4 @@ production:
   database: peerCashew_production
   username: peerCashew
   password: <%= ENV["PEERCASHEW_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
