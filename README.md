@@ -66,9 +66,13 @@ Overall, PeerCashew provides an easy and streamlined process for borrowers like 
 
 [PeerCashew](https://peercashew.onrender.com)
 
-## DB Diagram
+## ERD
 
 ![PeerCashew](/client/src/images/dbdiagram.png)
+
+## Domain model
+
+[PeerCashew](https://docs.google.com/spreadsheets/d/1EaUkLIp7Q1lyirIy0RL08zORHhtgBC440SGkbSQepCk/edit#gid=413058363)
 
 ## Technologies used
 
@@ -81,7 +85,55 @@ Overall, PeerCashew provides an easy and streamlined process for borrowers like 
 * LinkedIn API for employment verification
 * TransUnion API for credit checks
 
+## Components tree structure
+
+[PeerCashew](https://www.figma.com/file/e8Yl2GuPAywSCtfHxDLr4B/PeerCashew?node-id=0%3A1&t=SPAZvn8IHKd8xH5e-1)
+
+## Figma
+
+[PeerCashew](https://www.figma.com/file/bApNTrQgehCpF5246Jo3rj/PeerCashew?node-id=0%3A1&t=t3dkHgLpuDxc83kC-1)
+
+## API Routes
+
+The following routes are available in this API:
+
+- `POST /auth/login`
+- `POST /auth/register`
+- `POST /auth/logout`
+- `GET /loans`
+- `POST /loans`
+- `GET /loans/:id`
+- `PUT /loans/:id`
+- `DELETE /loans/:id`
+- `GET /investments`
+- `POST /investments`
+- `GET /investments/:id`
+- `PUT /investments/:id`
+- `DELETE /investments/:id`
+- `POST /payments`
+
+ *PeerCashew, will utilize a range of complex APIs to deliver a comprehensive and seamless solution for both borrowers and lenders. Some of the key APIs that our app will interact with include:*
+
+* **Stripe Payment API:** This API will enable us to handle payment processing and fund transfers efficiently.
+
+* **Google Maps Location and Geocoding API:** With this API, we will verify the borrower and lender addresses and display the loan and investment locations on a map.
+
+* **LinkedIn Professional Network API:** This API will allow us to verify the employment and income information of borrowers to ensure their eligibility for loans.
+
+* **TransUnion Credit Check API:** To run credit checks on borrowers, our app will interact with this API.
+
+* **SendGrid Email API:** Our app will use this API to send emails to both borrowers and lenders.
+
+By leveraging these APIs, PeerCashew will offer a streamlined and user-friendly experience for all parties involved.
+
+
 ## Stretch goals
+
+* Integrate a chat feature to allow borrowers and lenders to communicate in real-time.
+
+* Add a feature that allows borrowers to apply for loans with a co-signer.
+
+* Implement a referral program that rewards borrowers and investors for referring new users to the platform.
 
 * Implement a secondary market feature that allows investors to sell their investment to other investors.
 
@@ -95,12 +147,6 @@ Expand the platform to include personal loans and credit lines.
 * Partner with credit bureaus and financial institutions to expand the range of financial data available for credit analysis.
 
 * Develop a credit scoring system to help borrowers improve their creditworthiness and increase their chances of being approved for loans.
-
-* Integrate a chat feature to allow borrowers and lenders to communicate in real-time.
-
-* Add a feature that allows borrowers to apply for loans with a co-signer.
-
-* Implement a referral program that rewards borrowers and investors for referring new users to the platform.
 
 ## Contributing
 
