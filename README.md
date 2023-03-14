@@ -70,24 +70,16 @@ Overall, PeerCashew provides an easy and streamlined process for borrowers like 
 
 ![PeerCashew](/client/src/images/dbdiagram.png)
 
-## Domain model
-
-[PeerCashew](https://docs.google.com/spreadsheets/d/1EaUkLIp7Q1lyirIy0RL08zORHhtgBC440SGkbSQepCk/edit#gid=413058363)
-
 ## Technologies used
 
 * React for building the user interface
 * Rails for the backend server
 * Postgresql for the database
-* Stripe for payment processing
+* Stripe for payment processing (*stretch goal*)
 * Google Maps API for location and geocoding
 * SendGrid API for email delivery
 * LinkedIn API for employment verification
 * TransUnion API for credit checks
-
-## Components tree structure
-
-[PeerCashew](https://www.figma.com/file/e8Yl2GuPAywSCtfHxDLr4B/PeerCashew?node-id=0%3A1&t=SPAZvn8IHKd8xH5e-1)
 
 ## Figma
 
@@ -97,20 +89,26 @@ Overall, PeerCashew provides an easy and streamlined process for borrowers like 
 
 The following routes are available in this API:
 
-- `POST /auth/login`
-- `POST /auth/register`
-- `POST /auth/logout`
-- `GET /loans`
-- `POST /loans`
-- `GET /loans/:id`
-- `PUT /loans/:id`
-- `DELETE /loans/:id`
-- `GET /investments`
-- `POST /investments`
-- `GET /investments/:id`
-- `PUT /investments/:id`
-- `DELETE /investments/:id`
-- `POST /payments`
+- **`GET /users`** - list all users
+- **`GET /users/:id`** - show a specific user
+- **`POST /users`** - create a new user
+- **`PUT/PATCH /users/:id`** - update a user
+- **`DELETE /users/:id`** - delete a user
+- **`GET /users/:user_id/loans`** - list all loans for a specific user
+- **`POST /users/:user_id/loans`** - create a new loan for a specific user
+- **`GET /loans/:id`** - show a specific loan
+- **`PUT/PATCH /loans/:id`** - update a loan
+- **`DELETE /loans/:id`** - delete a loan
+- **`GET /loans/:loan_id/investors`** - list all investors for a specific loan
+- **`POST /loans/:loan_id/investors`** - create a new investor for a specific loan
+- **`GET /investors/:id`** - show a specific investor
+- **`PUT/PATCH /investors/:id`** - update an investor
+- **`DELETE /investors/:id`** - delete an investor
+
+*STRETCH GOALS*
+- **`POST /payments`** - create a new payment record
+- **`POST /payments/:id`** - could update an existing payment record.
+
 
  *PeerCashew, will utilize a range of complex APIs to deliver a comprehensive and seamless solution for both borrowers and lenders. Some of the key APIs that our app will interact with include:*
 
