@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
-  resources :users, only: [:index, :show, :create, :update, :destroy] do
-    resources :loans, only: [:index, :create]
-  end
+  # Routes for users
+  resources :users
 
-  resources :loans, only: [:show, :update, :destroy] do
-    resources :investors, only: [:index, :create]
-  end
+  # Routes for sessions
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
 
-  resources :investors, only: [:show, :update, :destroy]
+  # Routes for loans
+  resources :loans
+
+  # Routes for investors
+  resources :investors
 end
