@@ -32,12 +32,13 @@ class UsersController < ApplicationController
       if user.update!(user_params)
         render json: user
       else
-        render json: {error: users.errors.full_messages.join(,'')}, status: 422
+        render json: { error: user.errors.full_messages.join(',') }, status: 422
       end
     else
-      render json: {error: 'User not found'}, status: 404
+      render json: { error: 'User not found' }, status: 404
     end
   end
+
 
   # Delete a user
   def destroy
