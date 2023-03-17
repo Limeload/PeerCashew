@@ -7,10 +7,12 @@ function Signup({ handleLogin }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [date_of_birth, setDateOfBirth] = useState('');
+  const [address, setAddress] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin(name, email, password);
+    handleLogin(name, email, password, date_of_birth, address);
   };
 
   return (
@@ -18,10 +20,10 @@ function Signup({ handleLogin }) {
     <div className='form'>
     <Link className='link' exact to='/'><h1>PeerCashew</h1></Link>
     <br />
-<h1 className='text-1'>Create an Account</h1>
+<h5 className='text-1'>Create an Account</h5>
 <Form onSubmit={handleSubmit}>
 <Form.Group className="mb-3">
-<Form.Label> Create Username</Form.Label>
+<Form.Label>Full Name</Form.Label>
         <Form.Control
         required
         type="text"
@@ -51,7 +53,27 @@ function Signup({ handleLogin }) {
         value={password}
         onChange= {(e) => setPassword(e.target.value)}/>
 </Form.Group>
-<Button type="submit">Create Account</Button>
+<Form.Group className="mb-3">
+       <Form.Label>Date of Birth</Form.Label>
+        <Form.Control
+        required
+        type="date"
+        id="date_of_birth"
+        autoComplete="off"
+        value={date_of_birth}
+        onChange= {(e) => setDateOfBirth(e.target.value)}/>
+</Form.Group>
+<Form.Group className="mb-3">
+       <Form.Label>Address</Form.Label>
+        <Form.Control
+        required
+        type="textarea"
+        id="address"
+        autoComplete="off"
+        value={address}
+        onChange= {(e) => setAddress(e.target.value)}/>
+</Form.Group>
+<Button variant="dark" type="submit">Create Account</Button>
 </Form>
 <br />
 <div>

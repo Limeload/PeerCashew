@@ -1,5 +1,6 @@
 import React from "react";
 import herosection from "../images/herosection.png";
+import { Link } from 'react-router-dom';
 import {Container, Row, Col, Button } from "react-bootstrap";
 
 function HeroSection(){
@@ -11,7 +12,7 @@ function HeroSection(){
             <div className="hero-content">
             <h1>Get a cashew-al loan with PeerCashew</h1>
             <h6>Discover your financial potential with PeerCashew - The platform that connects investors with borrowers for mutually beneficial financial opportunities.</h6>
-            <Button variant="dark">Get Started</Button>
+            <Link exact to="/login"><Button variant="dark">Get Started</Button></Link>
             </div>
           </Col>
           <Col md={6}>

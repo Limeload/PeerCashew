@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import login from "../images/login.jpg";
+import login from "../images/login.png";
 
 
 
@@ -19,7 +19,7 @@ function Login({ handleLogin }) {
             <div className='form'>
             <Link className='link' exact to='/'><h1>PeerCashew</h1></Link>
             <br />
-        <h1 className='text-1'>WELCOME BACK!</h1>
+        <h5 className='text-1'>WELCOME BACK!</h5>
         <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
         <Form.Label>Email address</Form.Label>
@@ -39,7 +39,7 @@ function Login({ handleLogin }) {
                 value={password}
                 onChange= {(e) => setPassword(e.target.value)}/>
         </Form.Group>
-        <Button type="submit">Log In</Button>
+        <Button variant="dark" type="submit">Log In</Button>
         </Form>
         <br />
         <div>
