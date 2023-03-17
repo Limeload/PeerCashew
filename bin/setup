@@ -30,13 +30,4 @@ FileUtils.chdir APP_ROOT do
 
   puts "\n== Restarting application server =="
   system! "bin/rails restart"
-
-  # Add X-Forwarded-Proto header
-set_config('X-Forwarded-Proto', 'https', false);
-
-# Add X-Forwarded-Port header
-set_config('X-Forwarded-Port', '443', false);
-
-# Add X-Forwarded-Host header
-set_config('X-Forwarded-Host', 'https://peercashew.onrender.com', false);
 end
