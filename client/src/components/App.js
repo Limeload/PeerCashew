@@ -1,4 +1,4 @@
-import React , { useState } from "react";
+import React , { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./Home";
 import "../App.css"
@@ -7,34 +7,25 @@ import Signup from "./Signup";
 
 function App() {
   const [user, setUser] = useState(null);
-  const handleLogin = (email, password) => {
-    fetch('/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        session: {
-          email: email,
-          password: password,
-        },
-      }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('Invalid email or password');
+  useEffect(() => {
+    fetch('/me')
+      .then(response => {
+        if(response.ok) {
+          response.json()
+          .then((user) => setUser(user))
         }
       })
-      .then((data) => {
-        setUser(data.user);
-        localStorage.setItem('user', JSON.stringify(data.user));
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  };
+  }, [])
+
+  function onLogIn(loggedInUser) {
+    setUser(loggedInUser)
+  }
+
+  function onLogOut(){
+    setUser(null)
+  }
+
+  console.log(user)
 
 
   return (
@@ -42,13 +33,13 @@ function App() {
       <div className="App">
         <Switch>
           <Route exact="true" path="/">
-          <Home user={user} setUser={setUser} />
+          <Home user={user} onLogOut={onLogOut}/>
           </Route>
           <Route path="/login">
-           <Login handleLogin={handleLogin} />
+           <Login onLogIn={onLogIn}/>
           </Route>
           <Route path="/signup">
-            <Signup handleLogin={handleLogin} />
+            <Signup onLogIn={onLogIn} />
             </Route>
         </Switch>
       </div>

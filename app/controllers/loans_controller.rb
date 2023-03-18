@@ -14,13 +14,9 @@ class LoansController < ApplicationController
   end
 
   def create
-    loan = Loan.new(loan_params)
+    loan = Loan.create!(loan_params)
     loan.borrower_id = current_user.id
-    if loan.save
-      render json: loan, status: :created
-    else
-      render json: { errors: loan.errors.full_messages }, status: :unprocessable_entity
-    end
+    render json: loan, status: :created
   end
 
 
@@ -28,11 +24,8 @@ class LoansController < ApplicationController
   end
 
   def update
-    if loan.update(loan_params)
-      render json: loan, status: :ok
-    else
-      render json: { errors: loan.errors.full_messages }, status: :unprocessable_entity
-    end
+     loan.update!(loan_params)
+     render json: loan, status: :ok
   end
 
 

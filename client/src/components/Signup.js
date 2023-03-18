@@ -1,19 +1,46 @@
 import React, { useState } from 'react';
 import { Button, Form} from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link , useHistory } from 'react-router-dom';
 import register from "../images/register.jpg";
 
-function Signup({ handleLogin }) {
+function Signup({ onLogIn }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [date_of_birth, setDateOfBirth] = useState('');
   const [address, setAddress] = useState('');
+  let history = useHistory()
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleLogin(name, email, password, date_of_birth, address);
-  };
+  function handleSubmit(e) {
+        e.preventDefault()
+        let signupInput = {
+            name: name,
+            email: email,
+            password: password,
+            date_of_birth: date_of_birth,
+            address: address
+        }
+        fetch('/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json',
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify(signupInput)
+        })
+            .then(res => {
+                if(res.ok) {
+                    res.json()
+                    .then(newUser => onLogIn(newUser))
+                    history.push('/')
+                }
+            })
+        setName("")
+        setEmail("")
+        setPassword("")
+        setDateOfBirth("")
+        setAddress("")
+    }
 
   return (
     <div className="login-form">

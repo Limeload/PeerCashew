@@ -1,23 +1,23 @@
 class ApplicationController < ActionController::Base
-  include ActionController::Cookies
-  protect_from_forgery with: :exception
-  before_action :require_login
+ # SESSIONS & COOKIES
+ include ActionController::Cookies
+ before_action :authorize
+
+ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+ rescue_from ActiveRecord::RecordInvalid, with: :render_record_invalid
+
+ def render_not_found(error)
+    render json: {error: error.message }, status: :not_found
+ end
+
+ def render_record_invalid invalid
+   render json: {errors: invalid.record.errors}, status: :unprocessable_entity
+ end
 
   private
 
-  def require_login
-    unless logged_in?
-      render json: { error: "You must be logged in to access this section" }, status: :unauthorized
-    end
+  def authorize
+    @current_user = User.find_by(id: session[:user_id])
+    render json: { errors: ["Not authorized, please login"] }, status: :unauthorized unless @current_user
   end
-
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
-  end
-  helper_method :current_user
-
-  def logged_in?
-    current_user != nil
-  end
-  helper_method :logged_in?
 end
