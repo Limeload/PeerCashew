@@ -1,38 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Josefin+Sans:wght@300&family=Nunito:wght@200&display=swap');
 .App {
   text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Nunito', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.hero-section {
+  position: relative;
+  padding: 100px 0;
+  background-color: #f8f9fa;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.hero-image {
+  position: relative;
+  height: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.hero-image img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30rem;
+  height: 22rem;
+  object-fit: cover;
+}
+
+.hero-content {
+  max-width: 500px;
+  text-align: left;
+}
+
+.hero-content h1 {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.hero-content h6 {
+  font-size: 18px;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.hero-content {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 15px 30px;
+}
+
+.body {
+  padding: 60px 0;
+  background-color: #f8f9fa;
+}
+
+.body h1 {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.body h6 {
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.card h5 {
+  border: none;
+  padding-top: 2rem;
+  font-weight: bold;
+  padding: 1rem 3.5rem;
+;
+}
+
+.card-title {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.card-text {
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.testimonial-section {
+  background-color: #f8f9fa;
+  padding: 50px 0;
+}
+
+.testimonial-heading {
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.testimonial-subtitle {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 50px;
+}
+
+.testimonial-row {
+  margin-bottom: 30px;
+}
+
+.testimonial-text {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.testimonial-text h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.testimonial-text p {
+  font-size: 16px;
+  margin-bottom: 0;
+}
+
+.review-button {
+  margin-top: 2rem;
+}
+
+.login-form {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
+.form {
+  width: 40%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: left;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.form h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: black;
+  font-weight: 400;
+}
+
+.form h5 {
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+}
+
+.form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form label {
+  font-weight: 600;
+}
+
+.form input {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 0.5rem ;
+}
+
+.form .btn {
+  margin-top: 1.5rem;
+  border-radius: 5px;
+}
+
+.form .text {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+
+.form .text a {
+  color: black;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.image {
+  width: 30%;
+}
+
+.image img {
+  width: 100%;
+  height: auto;
 }
