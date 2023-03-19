@@ -34,9 +34,9 @@ loan10 = Loan.create(borrower: user10, title: 'Green Loan', description: 'This l
 
 puts 'Seeding investors'
 
-investor1 = Investor.create(user: user10, loan: loan10, investment_amount: 1000, interest_rate: 4.00, status: 'Active')
-investor2 = Investor.create(user: user9, loan: loan9, investment_amount: 5000, interest_rate: 6.50, status: 'Pending')
-investor3 = Investor.create(user: user8, loan: loan8, investment_amount: 3500, interest_rate: 4.50, status: 'Closed')
+investor1 = Investor.create(lender: user10, loan: loan10, investment_amount: 1000, interest_rate: 4.00, status: 'Active')
+investor2 = Investor.create(lender: user9, loan: loan9, investment_amount: 5000, interest_rate: 6.50, status: 'Pending')
+investor3 = Investor.create(lender: user8, loan: loan8, investment_amount: 3500, interest_rate: 4.50, status: 'Closed')
 
 
 

@@ -16,6 +16,7 @@ gem 'hirb'
 
 gem 'rack-cors'
 
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 

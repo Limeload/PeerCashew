@@ -1,5 +1,5 @@
 class Investor < ApplicationRecord
-  belongs_to :user
+  belongs_to :lender, class_name: "User"
   belongs_to :loan
 
   validates :investment_amount, presence: true, numericality: { greater_than: 0 }

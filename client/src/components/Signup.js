@@ -12,35 +12,37 @@ function Signup({ onLogIn }) {
   let history = useHistory()
 
   function handleSubmit(e) {
-        e.preventDefault()
-        let signupInput = {
-            name: name,
-            email: email,
-            password: password,
-            date_of_birth: date_of_birth,
-            address: address
+    e.preventDefault();
+    let signupInput = {
+      name: name,
+      email: email,
+      password: password,
+      date_of_birth: date_of_birth,
+      address: address,
+    };
+    fetch("/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(signupInput),
+      credentials: "include", // Add credentials option here
+    })
+      .then((res) => {
+        if (res.ok) {
+          res.json().then((newUser) => onLogIn(newUser));
+          history.push("/");
         }
-        fetch('/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type' : 'application/json',
-                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            },
-            body: JSON.stringify(signupInput)
-        })
-            .then(res => {
-                if(res.ok) {
-                    res.json()
-                    .then(newUser => onLogIn(newUser))
-                    history.push('/')
-                }
-            })
-        setName("")
-        setEmail("")
-        setPassword("")
-        setDateOfBirth("")
-        setAddress("")
-    }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    setName("");
+    setEmail("");
+    setPassword("");
+    setDateOfBirth("");
+    setAddress("");
+  }
 
   return (
     <div className="login-form">
