@@ -36,7 +36,7 @@ function App() {
           <Home user={user} onLogOut={onLogOut}/>
           </Route>
           <Route path="/login">
-           <Login onLogIn={onLogIn}/>
+           {(!user) ? <Login onLogIn={onLogIn}/> : null }
           </Route>
           <Route path="/signup">
             <Signup onLogIn={onLogIn} />

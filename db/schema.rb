@@ -67,7 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_15_052200) do
     t.string "email"
     t.string "password_digest"
     t.string "name"
-    t.date "date_of_birth"
+    t.string "date_of_birth"
     t.string "address"
   end
 
