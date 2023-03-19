@@ -1,18 +1,31 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link , useHistory } from 'react-router-dom';
 import login from "../images/login.png";
 
-
-
-function Login({ handleLogin }) {
+function Login({ onLogIn }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  let history = useHistory();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    handleLogin(email, password);
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+        fetch("/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({email, password})
+        })
+        .then(res => res.json())
+            .then(loggedInUser => {
+                onLogIn(loggedInUser)
+                history.push('/')
+            })
+        setEmail("")
+        setPassword("")
+    }
 
   return (
     <div className="login-form">

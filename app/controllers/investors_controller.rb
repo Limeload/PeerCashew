@@ -15,23 +15,16 @@ class InvestorsController < ApplicationController
   end
 
   def create
-    investor = Investor.new(investor_params)
-    if investor.save
-      render json: investor, status: :created
-    else
-      render json: { errors: investor.errors.full_messages }, status: :unprocessable_entity
-    end
+    investor = Investor.create!(investor_params)
+    render json: investor, status: :created
   end
 
   def edit
   end
 
   def update
-    if investor.update!(investor_params)
-      render json: investor, status: :ok
-    else
-      render json: { errors: investor.errors.full_messages }, status: :unprocessable_entity
-    end
+   investor.update!(investor_params)
+   render json: investor, status: :ok
   end
 
   def destroy
@@ -46,6 +39,6 @@ class InvestorsController < ApplicationController
     end
 
     def investor_params
-      params.require(:investor).permit(:user_id, :loan_id, :investment_amount, :interest_rate, :status)
+      params.permit(:user_id, :loan_id, :investment_amount, :interest_rate, :status)
     end
 end
