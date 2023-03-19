@@ -7,11 +7,13 @@ import Testimonial from "./Testimonials";
 
 function Home({user, onLogOut}) {
 function handleLogOut() {
-  fetch('/logout', {
-      method: 'DELETE'
-  })
-      .then(() => onLogOut())
-}
+    fetch('/logout', {
+        method: 'DELETE',
+        credentials: 'include'
+    })
+        .then(() => onLogOut())
+  }
+
 
     return(
         <div>

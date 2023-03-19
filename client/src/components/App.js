@@ -25,9 +25,6 @@ function App() {
     setUser(null)
   }
 
-  console.log(user)
-
-
   return (
     <BrowserRouter>
       <div className="App">

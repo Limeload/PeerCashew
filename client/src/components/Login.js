@@ -10,22 +10,23 @@ function Login({ onLogIn }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-        fetch("/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            },
-            body: JSON.stringify({email, password})
-        })
-        .then(res => res.json())
-            .then(loggedInUser => {
-                onLogIn(loggedInUser)
-                history.push('/')
-            })
-        setEmail("")
-        setPassword("")
-    }
+    fetch("/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            // 'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({ email, password }),
+        credentials: 'include', // add this line to include credentials
+    })
+    .then(res => res.json())
+    .then(loggedInUser => {
+        onLogIn(loggedInUser)
+        history.push('/')
+    })
+    setEmail("")
+    setPassword("")
+}
 
   return (
     <div className="login-form">
