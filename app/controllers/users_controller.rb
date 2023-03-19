@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authorize, only: [:create, :me, :index]
+  skip_before_action :authorize, only: [:create, :me, :index, :profile]
 
   # List all users
   def index
@@ -26,6 +26,10 @@ class UsersController < ApplicationController
     render json: user, status: :ok
   end
 
+  # User's profile
+  def profile
+    @user = current_user
+  end
 
   # Delete a user
   def destroy

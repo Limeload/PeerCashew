@@ -80,6 +80,8 @@ Overall, PeerCashew provides an easy and streamlined process for borrowers like 
 * SendGrid API for email delivery
 * LinkedIn API for employment verification
 * TransUnion API for credit checks
+* Some icons used in this project are provided by [Storyset](https://storyset.com/).
+
 
 ## Figma
 

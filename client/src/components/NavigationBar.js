@@ -18,7 +18,10 @@ function NavigationBar({user, handleLogOut}) {
           <Nav className="justify-content-end">
             {user ? <h6>{user?.name}</h6> : null}
             {user ? (
+              <Nav>
+              <Nav.Link href="/profile">Profile</Nav.Link>
               <Link to="/"><Button variant='dark' onClick={handleLogOut}>Logout</Button></Link>
+              </Nav>
             ) : (
               <Link to="/login"><Button variant="dark">Login / Signup</Button></Link>
             )}

@@ -22,7 +22,7 @@ function Login({ onLogIn }) {
     .then(res => res.json())
     .then(loggedInUser => {
         onLogIn(loggedInUser)
-        history.push('/')
+        history.push('/profile')
     })
     setEmail("")
     setPassword("")
