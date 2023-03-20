@@ -12,7 +12,7 @@ function HeroSection(){
             <div className="hero-content">
             <h1>Get a cashew-al loan with PeerCashew</h1>
             <h6>Discover your financial potential with PeerCashew - The platform that connects investors with borrowers for mutually beneficial financial opportunities.</h6>
-            <Link exact to="/login"><Button variant="dark">Get Started</Button></Link>
+            <Link exact to="/loans"><Button variant="dark">Get Started</Button></Link>
             </div>
           </Col>
           <Col md={6}>

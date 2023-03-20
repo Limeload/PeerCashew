@@ -5,6 +5,7 @@ import "../App.css"
 import Login from "./Login";
 import Signup from "./Signup";
 import Profile from "./Profile";
+import LoanPage from "./LoanPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -41,6 +42,9 @@ function App() {
             </Route>
             <Route path='/profile'>
               <Profile user={user} onLogIn={onLogIn} onLogOut={onLogOut} />
+            </Route>
+            <Route path='/loans'>
+              <LoanPage  />
             </Route>
         </Switch>
       </div>

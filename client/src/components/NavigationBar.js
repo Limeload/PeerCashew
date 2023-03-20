@@ -10,7 +10,7 @@ function NavigationBar({user, handleLogOut}) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#loans">Loans</Nav.Link>
+            <Nav.Link href="/loans">Loans</Nav.Link>
             <Nav.Link href="#investments">Investments</Nav.Link>
             {/* <Nav.Link href="#payments">Payments</Nav.Link> */}
             <Nav.Link href="#about">About</Nav.Link>
