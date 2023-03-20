@@ -26,7 +26,7 @@ function Signup({ onLogIn }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(signupInput),
-      credentials: "include", // Add credentials option here
+      credentials: "include", 
     })
       .then((res) => {
         if (res.ok) {

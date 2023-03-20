@@ -33,7 +33,6 @@ function Profile({ user, onLogOut, onLogIn }) {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        // 'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
       },
       body: JSON.stringify(profileInput),
     })
@@ -112,8 +111,7 @@ function Profile({ user, onLogOut, onLogIn }) {
           <Button variant='dark' type='submit'> Save Changes</Button>
         </Form>
         <br />
-        <div>
-        Logged in as {user?.name}. <Link exact to='/'>Back to Home!</Link>
+        <div><Link exact to='/'>Back to Home!</Link>
             </div>
             </div>
             <div className='image'>

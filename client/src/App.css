@@ -6,6 +6,12 @@
   font-family: 'Nunito', sans-serif;
 }
 
+.username {
+  font-weight: bolder;
+  font-size: larger;
+  background-color: blanchedalmond;
+}
+
 .hero-section {
   position: relative;
   padding: 100px 0;

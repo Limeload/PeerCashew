@@ -16,15 +16,16 @@ function NavigationBar({user, handleLogOut}) {
             <Nav.Link href="#about">About</Nav.Link>
           </Nav>
           <Nav className="justify-content-end">
-            {user ? <h6>{user?.name}</h6> : null}
             {user ? (
               <Nav>
-              <Nav.Link href="/profile">Profile</Nav.Link>
+              <Nav.Link href="#">Logged in as</Nav.Link>
+              <Nav.Link href="/profile">{user ? <h6 className='username'>{user?.name}</h6> : null}</Nav.Link>
               <Link to="/"><Button variant='dark' onClick={handleLogOut}>Logout</Button></Link>
               </Nav>
             ) : (
               <Link to="/login"><Button variant="dark">Login / Signup</Button></Link>
             )}
+            <br />
           </Nav>
         </Navbar.Collapse>
       </Container>
