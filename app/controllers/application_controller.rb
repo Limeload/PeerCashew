@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
  # SESSIONS & COOKIES
  include ActionController::Cookies
  before_action :authorize
+ skip_before_action :verify_authenticity_token
 
  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
  rescue_from ActiveRecord::RecordInvalid, with: :render_record_invalid
