@@ -13,7 +13,6 @@ function NavigationBar({user, handleLogOut}) {
             <Nav.Link href="/loans">Loans</Nav.Link>
             <Nav.Link href="#investments">Investments</Nav.Link>
             {/* <Nav.Link href="#payments">Payments</Nav.Link> */}
-            <Nav.Link href="#about">About</Nav.Link>
           </Nav>
           <Nav className="justify-content-end">
             {user ? (

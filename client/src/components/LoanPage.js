@@ -37,7 +37,7 @@ function LoanPage({ handleLogOut }) {
 </Accordion.Item>
   </Accordion>
   <br />
-  <h3> Check Your Loan Eligibility in a Few Simple Steps</h3>
+  <h3> Check Your Loan Eligibility</h3>
 <Accordion defaultActiveKey="0">
     <>
     <br />
@@ -51,11 +51,11 @@ function LoanPage({ handleLogOut }) {
 </Accordion.Item>
 <Accordion.Item eventKey='2'>
   <Accordion.Header>3. Employment status:</Accordion.Header>
-  <Accordion.Body>If the application is approved, the lending institution will provide a loan offer, including loan amount, interest rate, and repayment terms.</Accordion.Body>
+  <Accordion.Body>The borrower must be employed full-time or part-time, or have a stable source of income, such as self-employment or retirement benefits.</Accordion.Body>
 </Accordion.Item>
 <Accordion.Item eventKey='3'>
-  <Accordion.Header>4. Loan disbursement</Accordion.Header>
-  <Accordion.Body>If the loan offer is accepted, the lending institution will disburse the loan funds to the borrower's account.</Accordion.Body>
+  <Accordion.Header>4. Credit history</Accordion.Header>
+  <Accordion.Body> The borrower must have a good credit history, with no recent bankruptcies, foreclosures, or delinquencies on credit accounts.</Accordion.Body>
 </Accordion.Item>
 </>
   </Accordion>
