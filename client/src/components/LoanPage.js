@@ -1,20 +1,18 @@
-import React, {useState} from 'react';
-import { Container, Accordion, Button } from 'react-bootstrap';
+import React from 'react';
+import { Container, Row, Col, Accordion, Button } from 'react-bootstrap';
 import Footer from './Footer';
+import LoanCalculator from './LoanCalculator';
 import NavigationBar from './NavigationBar';
+import { Link } from 'react-router-dom';
 
 function LoanPage({ handleLogOut }) {
-  const [showEligibility, setShowEligibility] = useState(false);
-
-  const handleEligibilityClick = () => {
-    setShowEligibility(!showEligibility);
-  };
-
   return (
 <div>
 <NavigationBar  handleLogOut={handleLogOut} />
   <Container>
-<div className='loan-content'>
+    <Row>
+      <Col md={6}>
+      <div className='hero-content'>
 <h1>Need cash to peel away your debt? We've got you covered! </h1>
 <h6>Get a loan that won't leave you feeling like a lemon.</h6>
 <Accordion defaultActiveKey="0">
@@ -38,11 +36,11 @@ function LoanPage({ handleLogOut }) {
   <Accordion.Body>If the loan offer is accepted, the lending institution will disburse the loan funds to the borrower's account.</Accordion.Body>
 </Accordion.Item>
   </Accordion>
-
-<Button variant='dark' onClick={handleEligibilityClick}> Check Eligibility </Button>
+  <br />
+  <h3> Check Your Loan Eligibility in a Few Simple Steps</h3>
 <Accordion defaultActiveKey="0">
-  {showEligibility ? (
     <>
+    <br />
 <Accordion.Item eventKey='0'>
   <Accordion.Header>1. Credit score</Accordion.Header>
   <Accordion.Body>Most lending institutions require a minimum credit score to be eligible for a loan.</Accordion.Body>
@@ -60,11 +58,17 @@ function LoanPage({ handleLogOut }) {
   <Accordion.Body>If the loan offer is accepted, the lending institution will disburse the loan funds to the borrower's account.</Accordion.Body>
 </Accordion.Item>
 </>
-  ) : null }
   </Accordion>
-<Button variant='dark'> Start your application </Button>
-<Button variant='dark'> Check your laon status </Button>
+  <br />
+  <Link to="/loanForm">
+  <Button variant='dark'> Start your application </Button>
+  </Link>
 </div>
+</Col>
+<Col md={6}>
+  <LoanCalculator />
+</Col>
+</Row>
   </Container>
   <Footer />
 </div>

@@ -201,18 +201,85 @@
   height: auto;
 }
 
-.loan-content {
-  padding: 2rem 10rem;
+.loan-calculator {
+  text-align: left;
+  max-width: 600px; /* increased width */
+  margin-bottom: 3rem;
+  padding: 3rem 3rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.loan-content h1 {
-  font-size:  48px;
+
+.loan-calculator h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.loan-content h2 {
   font-weight: bold;
-  margin-bottom: 30px;
+  margin-top: 1rem;
 }
 
-.loan-content h6 {
-  font-size: 18px;
-  margin-bottom: 30px;
-  line-height: 1.5;
+.loan-image {
+  top: 0;
+  width: 30rem;
+  right: 0;
+}
+
+.loan-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.payment {
+  background-color: blanchedalmond;
+}
+
+.modal-header {
+  border-bottom: none;
+}
+
+.modal-title {
+  font-size: 8px;
+}
+
+.modal-body p {
+  margin: 10px 0;
+}
+
+.loan-form {
+  text-align: left;
+  max-width: 600px;
+  padding: 3rem 3rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-left: 15rem;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+textarea,
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 2px;
+}
+
+.loanform-image img {
+  width: 35rem;
+  position: absolute;
+  margin-left: 35rem;
 }

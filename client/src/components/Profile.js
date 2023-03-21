@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Modal } from 'react-bootstrap';
 import { Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import profile from "../images/profile.png"
@@ -9,6 +10,12 @@ function Profile({ user, onLogOut, onLogIn }) {
   const [password, setPassword] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [address, setAddress] = useState('');
+
+  // Modal handlers for saved state
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
 
   useEffect(() => {
     if (user) {
@@ -108,7 +115,18 @@ function Profile({ user, onLogOut, onLogIn }) {
               onChange={(e) => setAddress(e.target.value)}
             />
           </Form.Group>
-          <Button variant='dark' type='submit'> Save Changes</Button>
+          <Button variant='dark' type='submit' onClick={handleShow}> Save Changes</Button>
+          <Modal show={show} onHide={handleClose} animations={false}>
+            <Modal.Header closeButton>
+              <Modal.Title>PeerCashew</Modal.Title>
+            </Modal.Header>
+            <Modal.Body> Your information has been saved!</Modal.Body>
+            <Modal.Footer>
+          <Button variant="dark" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+          </Modal>
         </Form>
         <br />
         <div><Link exact to='/'>Back to Home!</Link>
