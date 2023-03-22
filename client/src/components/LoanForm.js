@@ -5,7 +5,7 @@ import NavigationBar from './NavigationBar';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
 
-const LoanForm = () => {
+function LoanForm({user, onLogIn, onLogOut}){
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
@@ -23,7 +23,7 @@ const LoanForm = () => {
       term_length: term,
     };
 
-    fetch('/loans', {
+    fetch('/loans/' + user.id, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -47,9 +47,9 @@ const LoanForm = () => {
 
   return (
     <div>
-          <NavigationBar />
+          <NavigationBar user={user} onLogIn={onLogIn} onLogOut={onLogOut}  />
     <div className="loan-form">
-      <h2>Create a new loan</h2>
+      <h2>Apply for your loan</h2>
       <div className='loanform-image'>
                 <img src={loanform} alt={loanform} />
             </div>

@@ -5,10 +5,10 @@ import LoanCalculator from './LoanCalculator';
 import NavigationBar from './NavigationBar';
 import { Link } from 'react-router-dom';
 
-function LoanPage({ handleLogOut }) {
+function LoanPage({user, onLogIn, onLogOut }) {
   return (
 <div>
-<NavigationBar  handleLogOut={handleLogOut} />
+<NavigationBar user={user} onLogIn={onLogIn} onLogOut={onLogOut} />
   <Container>
     <Row>
       <Col md={6}>

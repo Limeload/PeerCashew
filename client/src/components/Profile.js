@@ -53,6 +53,21 @@ function Profile({ user, onLogOut, onLogIn }) {
       });
   }
 
+  function handleDelete(e) {
+    e.preventDefault();
+    if (window.confirm('Are you sure you want to delete your account?')) {
+      fetch('/users/' + user.id, {
+        method: 'DELETE',
+      }).then((res) => {
+        if (res.ok) {
+          onLogOut();
+          window.location.href = '/';
+        }
+      });
+    }
+  }
+
+
   return (
     <div className='login-form'>
       <div className='form'>
@@ -116,6 +131,8 @@ function Profile({ user, onLogOut, onLogIn }) {
             />
           </Form.Group>
           <Button variant='dark' type='submit' onClick={handleShow}> Save Changes</Button>
+          <br />
+          <Button variant='light' onClick={handleDelete}> Delete Account</Button>
           <Modal show={show} onHide={handleClose} animations={false}>
             <Modal.Header closeButton>
               <Modal.Title>PeerCashew</Modal.Title>

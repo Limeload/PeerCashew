@@ -45,10 +45,10 @@ function App() {
               <Profile user={user} onLogIn={onLogIn} onLogOut={onLogOut} />
             </Route>
             <Route path='/loans'>
-              <LoanPage />
+              <LoanPage user={user} onLogIn={onLogIn} onLogOut={onLogOut} />
             </Route>
             <Route path='/loanForm'>
-              <LoanForm />
+              <LoanForm user={user} onLogIn={onLogIn} onLogOut={onLogOut} />
             </Route>
         </Switch>
       </div>
