@@ -14,14 +14,14 @@ function Login({ onLogIn }) {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            // 'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         },
         body: JSON.stringify({ email, password }),
-        credentials: 'include', // add this line to include credentials
+        credentials: 'include',
     })
     .then(res => res.json())
     .then(loggedInUser => {
         onLogIn(loggedInUser)
+        history.push('/')
         history.push('/profile')
     })
     setEmail("")

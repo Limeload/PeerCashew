@@ -1,20 +1,18 @@
-import React, {useState} from 'react';
-import { Container, Accordion, Button } from 'react-bootstrap';
+import React from 'react';
+import { Container, Row, Col, Accordion, Button } from 'react-bootstrap';
 import Footer from './Footer';
+import LoanCalculator from './LoanCalculator';
 import NavigationBar from './NavigationBar';
+import { Link } from 'react-router-dom';
 
-function LoanPage({ handleLogOut }) {
-  const [showEligibility, setShowEligibility] = useState(false);
-
-  const handleEligibilityClick = () => {
-    setShowEligibility(!showEligibility);
-  };
-
+function LoanPage({user, onLogIn, onLogOut }) {
   return (
 <div>
-<NavigationBar  handleLogOut={handleLogOut} />
+<NavigationBar user={user} onLogIn={onLogIn} onLogOut={onLogOut} />
   <Container>
-<div className='loan-content'>
+    <Row>
+      <Col md={6}>
+      <div className='hero-content'>
 <h1>Need cash to peel away your debt? We've got you covered! </h1>
 <h6>Get a loan that won't leave you feeling like a lemon.</h6>
 <Accordion defaultActiveKey="0">
@@ -38,11 +36,11 @@ function LoanPage({ handleLogOut }) {
   <Accordion.Body>If the loan offer is accepted, the lending institution will disburse the loan funds to the borrower's account.</Accordion.Body>
 </Accordion.Item>
   </Accordion>
-
-<Button variant='dark' onClick={handleEligibilityClick}> Check Eligibility </Button>
+  <br />
+  <h3> Check Your Loan Eligibility</h3>
 <Accordion defaultActiveKey="0">
-  {showEligibility ? (
     <>
+    <br />
 <Accordion.Item eventKey='0'>
   <Accordion.Header>1. Credit score</Accordion.Header>
   <Accordion.Body>Most lending institutions require a minimum credit score to be eligible for a loan.</Accordion.Body>
@@ -53,18 +51,24 @@ function LoanPage({ handleLogOut }) {
 </Accordion.Item>
 <Accordion.Item eventKey='2'>
   <Accordion.Header>3. Employment status:</Accordion.Header>
-  <Accordion.Body>If the application is approved, the lending institution will provide a loan offer, including loan amount, interest rate, and repayment terms.</Accordion.Body>
+  <Accordion.Body>The borrower must be employed full-time or part-time, or have a stable source of income, such as self-employment or retirement benefits.</Accordion.Body>
 </Accordion.Item>
 <Accordion.Item eventKey='3'>
-  <Accordion.Header>4. Loan disbursement</Accordion.Header>
-  <Accordion.Body>If the loan offer is accepted, the lending institution will disburse the loan funds to the borrower's account.</Accordion.Body>
+  <Accordion.Header>4. Credit history</Accordion.Header>
+  <Accordion.Body> The borrower must have a good credit history, with no recent bankruptcies, foreclosures, or delinquencies on credit accounts.</Accordion.Body>
 </Accordion.Item>
 </>
-  ) : null }
   </Accordion>
-<Button variant='dark'> Start your application </Button>
-<Button variant='dark'> Check your laon status </Button>
+  <br />
+  <Link to="/loanForm">
+  <Button variant='dark'> Start your application </Button>
+  </Link>
 </div>
+</Col>
+<Col md={6}>
+  <LoanCalculator />
+</Col>
+</Row>
   </Container>
   <Footer />
 </div>
