@@ -283,3 +283,13 @@ input[type="number"] {
   position: absolute;
   margin-left: 35rem;
 }
+
+.profile-tab, .status-tab {
+  padding: 1.5rem;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.tabs{
+  flex: 10;
+}

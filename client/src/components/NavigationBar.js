@@ -18,7 +18,7 @@ function NavigationBar({user, handleLogOut}) {
             {user ? (
               <Nav>
               <Nav.Link href="#">Logged in as</Nav.Link>
-              <Nav.Link href="/profile">{user ? <h6 className='username'>{user?.name}</h6> : null}</Nav.Link>
+              <Nav.Link href="/dashboard">{user ? <h6 className='username'>{user?.name}</h6> : null}</Nav.Link>
               <Link to="/"><Button variant='dark' onClick={handleLogOut}>Logout</Button></Link>
               </Nav>
             ) : (

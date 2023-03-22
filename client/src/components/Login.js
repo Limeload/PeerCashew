@@ -22,7 +22,6 @@ function Login({ onLogIn }) {
     .then(loggedInUser => {
         onLogIn(loggedInUser)
         history.push('/')
-        history.push('/profile')
     })
     setEmail("")
     setPassword("")
