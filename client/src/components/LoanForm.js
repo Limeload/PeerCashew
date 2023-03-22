@@ -14,7 +14,7 @@ function LoanForm({ user, onLogIn, onLogOut }) {
   const [loanId, setLoanId] = useState(null);
 
   useEffect(() => {
-    fetch(`/loans/` + user?.id)
+    fetch(`/loans/${user?.id}`)
       .then((response) => response.json())
       .then((data) => {
         setTitle(data?.title);
@@ -51,6 +51,7 @@ function LoanForm({ user, onLogIn, onLogOut }) {
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
       body: JSON.stringify({ loan: formData }),
     })
       .then((response) => response.ok ? response.json() : Promise.reject('Network response was not ok.'))

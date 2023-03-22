@@ -19,7 +19,8 @@ class ApplicationController < ActionController::Base
   private
 
   def authorize
-    @current_user = User.find_by(id: session[:user_id])
+    @current_user ||= User.find_by(id: cookies.signed[:user_id]) if cookies.signed[:user_id]
     render json: { errors: ["Not authorized, please login"] }, status: :unauthorized unless @current_user
   end
+
 end
