@@ -293,3 +293,12 @@ input[type="number"] {
 .tabs{
   flex: 10;
 }
+
+.my-5 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.investment-image {
+  width: 44rem;
+}
