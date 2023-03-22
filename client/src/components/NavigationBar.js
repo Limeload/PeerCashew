@@ -11,7 +11,7 @@ function NavigationBar({user, handleLogOut}) {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/loans">Loans</Nav.Link>
-            <Nav.Link href="#investments">Investments</Nav.Link>
+            <Nav.Link href="/investors">Investments</Nav.Link>
             {/* <Nav.Link href="#payments">Payments</Nav.Link> */}
           </Nav>
           <Nav className="justify-content-end">

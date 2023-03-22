@@ -7,6 +7,8 @@ import Signup from "./Signup";
 import Profile from "./Profile";
 import LoanPage from "./LoanPage";
 import LoanForm from "./LoanForm";
+import InvestmentPage from "./InvestmentPage";
+import InvestmentForm from "./InvestmentForm";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -49,6 +51,12 @@ function App() {
             </Route>
             <Route path='/loanForm'>
               <LoanForm user={user} onLogIn={onLogIn} onLogOut={onLogOut} />
+            </Route>
+            <Route path='/investors'>
+              <InvestmentPage user={user} onLogIn={onLogIn} onLogOut={onLogOut} />
+            </Route>
+            <Route path='/investmentForm'>
+              <InvestmentForm user={user} onLogIn={onLogIn} onLogOut={onLogOut} />
             </Route>
         </Switch>
       </div>
