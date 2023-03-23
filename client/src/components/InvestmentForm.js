@@ -31,10 +31,10 @@ function InvestmentForm({ user, onLogIn, onLogOut }){
         interest_rate: interestRate,
       };
       let requestMethod = 'POST';
-      let url = '/loans/' + user.id;
+      let url = '/investors/' + user.id;
       if (loanId) {
         requestMethod = 'PUT';
-        url = `/loans/${loanId}`;
+        url = `/investors/${loanId}`;
       }
 
       fetch(url, {
@@ -48,31 +48,12 @@ function InvestmentForm({ user, onLogIn, onLogOut }){
         .then((data) => console.log(data))
         .catch((error) => console.error('There was a problem with the fetch operation:', error));
     }
-
-    const handleDelete = () => {
-      fetch(`/loans/${loanId}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      })
-      .then(response => {
-        if (response.ok) {
-          console.log('Loan deleted successfully');
-        } else {
-          throw new Error('Network response was not ok.');
-        }
-      })
-      .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-      });
-    };
     return(
         <div>
 <NavigationBar user={user} onLogIn={onLogIn} onLogOut={onLogOut}  />
     <div className="loan-form">
       <h2>Invest for your good</h2>
-      <div className='loanform-image'>
+      <div className='investor-image'>
                 <img src={invest} alt={invest} />
             </div>
       <Form onSubmit={handleSubmit}>
@@ -97,9 +78,6 @@ function InvestmentForm({ user, onLogIn, onLogOut }){
         <br />
         <Button variant="dark" type="submit">
           Submit Application
-        </Button>
-        <Button variant="light" onclick={handleDelete}>
-         Delete
         </Button>
       </Form>
       <br />
