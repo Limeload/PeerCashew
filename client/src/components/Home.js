@@ -6,13 +6,16 @@ import NavigationBar from "./NavigationBar";
 import Testimonial from "./Testimonials";
 
 function Home({user, onLogOut}) {
-function handleLogOut() {
-    fetch('/logout', {
-        method: 'DELETE',
-        credentials: 'include'
-    })
-        .then(() => onLogOut())
-  }
+    function handleLogOut() {
+        fetch('/logout', {
+          method: 'DELETE',
+          credentials: 'include'
+        })
+        .then(() => {
+          localStorage.removeItem('user');
+          onLogOut();
+        });
+      }
 
 
     return(

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button, Navbar, Nav, Container } from 'react-bootstrap';
 
 function NavigationBar({user, handleLogOut}) {
+
   return (
     <Navbar bg="light" expand="lg">
       <Container>

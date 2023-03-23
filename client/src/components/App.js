@@ -14,22 +14,33 @@ import StatusBoard from "./StatusBoard";
 
 function App() {
   const [user, setUser] = useState(null);
+
   useEffect(() => {
-    fetch('/me')
-      .then(response => {
-        if(response.ok) {
-          response.json()
-          .then((user) => setUser(user))
-        }
-      })
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    } else {
+      fetch('/me')
+        .then(response => {
+          if(response.ok) {
+            response.json()
+            .then((user) => {
+              setUser(user);
+              localStorage.setItem('user', JSON.stringify(user));
+            })
+          }
+        })
+    }
   }, [])
 
   function onLogIn(loggedInUser) {
     setUser(loggedInUser)
+    localStorage.setItem('user', JSON.stringify(loggedInUser));
   }
 
   function onLogOut(){
     setUser(null)
+    localStorage.removeItem('user');
   }
 
   return (
