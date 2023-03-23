@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   # Show a specific user
   def me
-    render json: @current_user, include: ['loans', 'investors'] status: :ok
+    render json: @current_user, include: ['loans', 'investors'], status: :ok
   end
 
   # Create a new user

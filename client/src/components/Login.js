@@ -17,22 +17,25 @@ function Login({ onLogIn }) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email, password }),
-      credentials: 'include',
+      credentials: 'include', // send cookies and session data with the request
     })
-      .then((res) => res.json())
-      .then((loggedInUser) => {
-        if (loggedInUser.error) { // if the response contains an error
-          setError(loggedInUser.error); // set the error state
+      .then((res) => {
+        if (res.ok) { // if the response status is 200-299
+          return res.json();
         } else {
-          onLogIn(loggedInUser);
-          history.push('/');
+          throw new Error('Login failed'); // handle non-200 response status
         }
+      })
+      .then((loggedInUser) => {
+        onLogIn(loggedInUser);
+        history.push('/');
       })
       .catch((error) => {
         console.error(error);
-        setError('An error occurred while logging in.'); // set the error state
+        setError('Invalid username or password');
       });
   };
+
 
   return (
     <div className="login-form">
