@@ -20,5 +20,7 @@ Rails.application.routes.draw do
    get '/loans/:id', to: 'loans#show'
   post '/loans/:id', to: 'loans#create'
   # Routes for investors
-  resources :investors
+  resources :investors, only: [:create, :update]
+  get '/investors/:id', to: 'investors#show'
+  post '/investors/:id', to: 'investors#create'
 end
