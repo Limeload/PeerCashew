@@ -201,6 +201,11 @@
   height: auto;
 }
 
+.error {
+  color: rgb(228, 83, 83);
+  font-weight: bolder;
+}
+
 .loan-calculator {
   text-align: left;
   max-width: 600px; /* increased width */

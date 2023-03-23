@@ -6,26 +6,33 @@ import login from "../images/login.png";
 function Login({ onLogIn }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   let history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-        credentials: 'include',
+    fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+      credentials: 'include',
     })
-    .then(res => res.json())
-    .then(loggedInUser => {
-        onLogIn(loggedInUser)
-        history.push('/')
-    })
-    setEmail("")
-    setPassword("")
-}
+      .then((res) => res.json())
+      .then((loggedInUser) => {
+        if (loggedInUser.error) { // if the response contains an error
+          setError(loggedInUser.error); // set the error state
+        } else {
+          onLogIn(loggedInUser);
+          history.push('/');
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        setError('An error occurred while logging in.'); // set the error state
+      });
+  };
 
   return (
     <div className="login-form">
@@ -33,6 +40,7 @@ function Login({ onLogIn }) {
             <Link className='link' exact to='/'><h1>PeerCashew</h1></Link>
             <br />
         <h5 className='text-1'>WELCOME BACK!</h5>
+        {error && <p className="error">{error}</p>}
         <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
         <Form.Label>Email address</Form.Label>
