@@ -20,18 +20,19 @@ function App() {
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     } else {
-      fetch('/me')
+      fetch('/me', { credentials: 'include' })
         .then(response => {
           if(response.ok) {
             response.json()
-            .then((user) => {
-              setUser(user);
-              localStorage.setItem('user', JSON.stringify(user));
-            })
+              .then((user) => {
+                setUser(user);
+                localStorage.setItem('user', JSON.stringify(user));
+              })
           }
         })
     }
   }, [])
+
 
   function onLogIn(loggedInUser) {
     setUser(loggedInUser)
