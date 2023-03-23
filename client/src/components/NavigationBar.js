@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button, Navbar, Nav, Container } from 'react-bootstrap';
 
 function NavigationBar({user, handleLogOut}) {
+
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -18,7 +19,7 @@ function NavigationBar({user, handleLogOut}) {
             {user ? (
               <Nav>
               <Nav.Link href="#">Logged in as</Nav.Link>
-              <Nav.Link href="/profile">{user ? <h6 className='username'>{user?.name}</h6> : null}</Nav.Link>
+              <Nav.Link href="/dashboard">{user ? <h6 className='username'>{user?.name}</h6> : null}</Nav.Link>
               <Link to="/"><Button variant='dark' onClick={handleLogOut}>Logout</Button></Link>
               </Nav>
             ) : (

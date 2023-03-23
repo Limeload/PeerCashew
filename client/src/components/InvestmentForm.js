@@ -1,6 +1,6 @@
 import React , { useState, useEffect } from "react";
 import { Button, Form } from 'react-bootstrap';
-import loanform from "../images/loanform.png";
+import invest from "../images/invest.png";
 import NavigationBar from './NavigationBar';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
@@ -73,7 +73,7 @@ function InvestmentForm({ user, onLogIn, onLogOut }){
     <div className="loan-form">
       <h2>Invest for your good</h2>
       <div className='loanform-image'>
-                <img src={loanform} alt={loanform} />
+                <img src={invest} alt={invest} />
             </div>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="amount">
@@ -103,7 +103,7 @@ function InvestmentForm({ user, onLogIn, onLogOut }){
         </Button>
       </Form>
       <br />
-      <div><Link exact to='/loans'>Go Back!</Link></div>
+      <div><Link exact to='/investors'>Go Back!</Link></div>
     </div>
     <Footer />
     </div>

@@ -201,6 +201,11 @@
   height: auto;
 }
 
+.error {
+  color: rgb(228, 83, 83);
+  font-weight: bolder;
+}
+
 .loan-calculator {
   text-align: left;
   max-width: 600px; /* increased width */
@@ -282,4 +287,23 @@ input[type="number"] {
   width: 35rem;
   position: absolute;
   margin-left: 35rem;
+}
+
+.profile-tab, .status-tab {
+  padding: 1.5rem;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.tabs{
+  flex: 10;
+}
+
+.my-5 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.investment-image {
+  width: 44rem;
 }

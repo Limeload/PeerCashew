@@ -9,13 +9,14 @@ class UsersController < ApplicationController
 
   # Show a specific user
   def me
-    render json: @current_user, status: :ok
+    render json: @current_user, include: ['loans', 'investors'] status: :ok
   end
 
   # Create a new user
   def create
     user = User.create!(user_params)
     session[:user_id] = user.id
+    cookies.signed[:user_id] = user.id
     render json: user, status: :created
   end
 

@@ -11,33 +11,38 @@ function LoanForm({ user, onLogIn, onLogOut }) {
   const [amount, setAmount] = useState('');
   const [interestRate, setInterestRate] = useState('');
   const [term, setTerm] = useState('');
+  const [status, setStatus] = useState('');
   const [loanId, setLoanId] = useState(null);
 
   useEffect(() => {
-    fetch(`/loans/` + user?.id)
-      .then((response) => response.json())
-      .then((data) => {
-        setTitle(data?.title);
-        setDescription(data?.description);
-        setAmount(data?.amount);
-        setInterestRate(data?.interest_rate);
-        setTerm(data?.term_length);
-        setLoanId(data?.id);
-      })
-      .catch((error) => {
-        console.error('There was a problem with the fetch operation:', error);
-      });
+    if (user?.id) {
+      fetch(`/loans/${user.id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setTitle(data?.title);
+          setDescription(data?.description);
+          setAmount(data?.amount);
+          setInterestRate(data?.interest_rate);
+          setTerm(data?.term_length);
+          setStatus(data?.status);
+          setLoanId(data?.id);
+        })
+        .catch((error) => {
+          console.error('There was a problem with the fetch operation:', error);
+        });
+    }
   }, [user?.id]);
 
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const formData = {
+    let formData = {
       title,
       description,
       amount,
       interest_rate: interestRate,
       term_length: term,
+      status: status || 'pending', // set 'pending' as default if status is not provided
     };
     let requestMethod = 'POST';
     let url = '/loans/' + user.id;
@@ -51,6 +56,7 @@ function LoanForm({ user, onLogIn, onLogOut }) {
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
       body: JSON.stringify({ loan: formData }),
     })
       .then((response) => response.ok ? response.json() : Promise.reject('Network response was not ok.'))
@@ -58,24 +64,6 @@ function LoanForm({ user, onLogIn, onLogOut }) {
       .catch((error) => console.error('There was a problem with the fetch operation:', error));
   }
 
-  const handleDelete = () => {
-    fetch(`/loans/${loanId}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-    .then(response => {
-      if (response.ok) {
-        console.log('Loan deleted successfully');
-      } else {
-        throw new Error('Network response was not ok.');
-      }
-    })
-    .catch(error => {
-      console.error('There was a problem with the fetch operation:', error);
-    });
-  };
 
   return (
     <div>
@@ -135,9 +123,6 @@ function LoanForm({ user, onLogIn, onLogOut }) {
         <br />
         <Button variant="dark" type="submit">
           Submit Application
-        </Button>
-        <Button variant="light" onclick={handleDelete}>
-         Delete
         </Button>
       </Form>
       <br />
