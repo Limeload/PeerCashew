@@ -3,9 +3,12 @@ Rails.application.routes.draw do
   resources :users do
     resources :loans, only: [:new, :create]
   end
+  get '/users/:user_id/loans', to: 'loans#index'
+  get '/users/:user_id/investors', to: 'investors#index'
 
   scope '/users/:id' do
     resources :loans, only: [:new, :create, :edit, :update, :destroy]
+    resources :investors, only: [:new, :create, :update, :destroy]
   end
   # Routes for sessions
   post "/signup", to: "users#create"
@@ -16,11 +19,11 @@ Rails.application.routes.draw do
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 
   # Routes for loans
-  resources :loans, only: [:create, :update]
-   get '/loans/:id', to: 'loans#show'
+  resources :loans
+  get '/loans/:id', to: 'loans#show'
   post '/loans/:id', to: 'loans#create'
   # Routes for investors
-  resources :investors, only: [:create, :update]
+  resources :investors
   get '/investors/:id', to: 'investors#show'
   post '/investors/:id', to: 'investors#create'
 end

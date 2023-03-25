@@ -42,7 +42,7 @@ function LoanForm({ user, onLogIn, onLogOut }) {
       amount,
       interest_rate: interestRate,
       term_length: term,
-      status: status || 'pending', // set 'pending' as default if status is not provided
+      status: status || 'Pending', // set 'pending' as default if status is not provided
     };
     let requestMethod = 'POST';
     let url = '/loans/' + user.id;

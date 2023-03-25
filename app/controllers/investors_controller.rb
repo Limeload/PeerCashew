@@ -13,7 +13,8 @@ class InvestorsController < ApplicationController
   end
 
   def new
-    investor = Investor.new
+    @user = User.find(params[:user_id])
+    @investor = @investor.investors.build
   end
 
   def create

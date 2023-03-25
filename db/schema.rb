@@ -31,7 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_194017) do
     t.decimal "amount", precision: 10, scale: 2, null: false
     t.decimal "interest_rate", precision: 4, scale: 2, null: false
     t.integer "term_length", null: false
-    t.integer "status", default: 0, null: false
+    t.string "status"
     t.index ["borrower_id"], name: "index_loans_on_borrower_id"
   end
 
