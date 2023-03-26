@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button, Col, Row } from "react-bootstrap";
 
-function LoanRequest({ user }) {
+function LoanRequest() {
   const [loans, setLoans] = useState([]);
-
   useEffect(() => {
     // Fetch loans data for the all the users of Peercashew
-    fetch(`/users/${user?.id}/loans`)
+    fetch(`/loans`)
       .then((response) => response.json())
       .then((data) => setLoans(data));
-  }, [user]);
+  }, []);
 
   const pendingLoans = loans.filter((loan) => loan?.status === "Pending");
 

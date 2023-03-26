@@ -1,5 +1,16 @@
 class UsersController < ApplicationController
-  skip_before_action :authorize, only: [:create, :me, :index, :profile]
+  skip_before_action :authorize, only: [:create, :me, :index, :profile, :investors, :loans]
+
+  def investors
+    @investors = Investor.where(lender_id: params[:id])
+    render json: @investors
+  end
+
+  def loans
+
+    @loans = Loan.where(borrower_id: params[:id])
+    render json: @loans
+  end
 
   # List all users
   def index

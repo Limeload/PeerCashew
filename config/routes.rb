@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   # Routes for users
-  resources :users do
-    resources :loans, only: [:new, :create]
+  resources :users, only: [] do
+    get :loans, on: :member
+    get :investors, on: :member
   end
   get '/users/:user_id/loans', to: 'loans#index'
   get '/users/:user_id/investors', to: 'investors#index'

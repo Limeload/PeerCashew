@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Badge, Card } from "react-bootstrap";
+import UserDashboard from "./UserDashboard";
 
 function StatusBoard({ user }) {
+  console.log(user);
   const [loans, setLoans] = useState([]);
   const [investors, setInvestors] = useState([]);
   useEffect(() => {
-    // Fetch loans data for the logged-in user
-    fetch(`/users/${user?.id}/loans`)
-      .then((response) => response.json())
-      .then((data) => setLoans(data));
+    if (user) {
+      fetch(`/users/${user.id}/loans`)
+        .then((response) => response.json())
+        .then((data) => setLoans(data));
 
-   // Fetch investors data for the logged-in user
-    fetch(`/users/${user?.id}/investors`)
-      .then((response) => response.json())
-      .then((data) => setInvestors(data));
+      fetch(`/users/${user.id}/investors`)
+        .then((response) => response.json())
+        .then((data) => setInvestors(data));
+    }
   }, [user]);
-
-  console.log(loans);
-  console.log(investors);
 
   return (
     <div>
@@ -49,15 +48,16 @@ function StatusBoard({ user }) {
                 {investors?.filter((i) => i.status === "Pending").length} Pending
               </Badge>{" "}
               <Badge variant="light">
-                {investors?.filter((i) => i.status === "Approved").length} Approved
+                {investors?.filter((i) => i.status === "Active").length} Active
               </Badge>{" "}
               <Badge variant="warning">
-                {investors?.filter((i) => i.status === "Rejected").length} Rejected
+                {investors?.filter((i) => i.status === "Closed").length} Closed
               </Badge>{" "}
             </Card.Text>
           </Card.Body>
         </Card>
       </div>
+      <UserDashboard user={user} />
     </div>
   );
 }

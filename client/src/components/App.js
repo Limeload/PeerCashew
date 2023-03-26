@@ -1,5 +1,5 @@
 import React , { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./Home";
 import "../App.css"
 import Login from "./Login";
@@ -44,7 +44,7 @@ function App() {
     localStorage.removeItem('user');
   }
 
-
+console.log(user);
 
   return (
     <BrowserRouter>
@@ -66,7 +66,7 @@ function App() {
               <Profile user={user} onLogIn={onLogIn} onLogOut={onLogOut} />
             </Route>
             <Route path="/statusBoard">
-            {user ? <StatusBoard user={user} /> : <Redirect to="/login" />}
+            <StatusBoard user={user} />
             </Route>
             <Route path='/loans'>
               <LoanPage user={user} onLogIn={onLogIn} onLogOut={onLogOut} />
