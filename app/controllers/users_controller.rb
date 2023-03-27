@@ -1,13 +1,14 @@
 class UsersController < ApplicationController
-  skip_before_action :authorize, only: [:create, :me, :index, :profile, :investors, :loans]
+  skip_before_action :authorize, only: [:create, :me, :show, :index, :profile, :investors, :loans]
 
+  # Logged in user's Investors
   def investors
     @investors = Investor.where(lender_id: params[:id])
     render json: @investors
   end
 
+  # Logged in user's Loans
   def loans
-
     @loans = Loan.where(borrower_id: params[:id])
     render json: @loans
   end
@@ -18,9 +19,16 @@ class UsersController < ApplicationController
   render json: users, status: :ok
   end
 
-  # Show a specific user
+  # Show a logged in user
   def me
+    @current_user = User.find_by(id: params[:id])
     render json: @current_user, include: ['loans', 'investors'], status: :ok
+  end
+
+  # Show a specific user
+  def show
+    @current_user = User.find_by(id: params[:id])
+    render json: @current_user, status: :ok
   end
 
   # Create a new user

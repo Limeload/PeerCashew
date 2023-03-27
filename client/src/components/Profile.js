@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import { Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link , useHistory } from 'react-router-dom';
 import profile from "../images/profile.png"
 
 function Profile({ user, onLogOut, onLogIn }) {
@@ -10,6 +10,8 @@ function Profile({ user, onLogOut, onLogIn }) {
   const [password, setPassword] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [address, setAddress] = useState('');
+  let history = useHistory();
+
 
   // Modal handlers for saved state
   const [show, setShow] = useState(false);
@@ -18,13 +20,11 @@ function Profile({ user, onLogOut, onLogIn }) {
 
 
   useEffect(() => {
-    if (user) {
       setName(user?.name);
       setEmail(user?.email);
       setPassword(user?.password);
       setDateOfBirth(user?.date_of_birth);
       setAddress(user?.address);
-    }
   }, [user]);
 
   function handleSubmit(e) {
@@ -36,7 +36,7 @@ function Profile({ user, onLogOut, onLogIn }) {
       date_of_birth: dateOfBirth,
       address: address,
     };
-    fetch('/users/' + user.id, {
+    fetch('/users/' + user?.id, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -56,12 +56,12 @@ function Profile({ user, onLogOut, onLogIn }) {
   function handleDelete(e) {
     e.preventDefault();
     if (window.confirm('Are you sure you want to delete your account?')) {
-      fetch('/users/' + user.id, {
+      fetch('/users/' + user?.id, {
         method: 'DELETE',
       }).then((res) => {
         if (res.ok) {
           onLogOut();
-          window.location.href = '/';
+          history.push('/');
         }
       });
     }

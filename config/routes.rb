@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
   get '/users/:user_id/loans', to: 'loans#index'
   get '/users/:user_id/investors', to: 'investors#index'
+  resources :users
 
   scope '/users/:id' do
     resources :loans, only: [:new, :create, :edit, :update, :destroy]
