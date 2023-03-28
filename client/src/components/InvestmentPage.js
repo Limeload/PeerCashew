@@ -13,7 +13,7 @@ function InvestmentPage({user, onLogIn, onLogOut}) {
       <p>Ready to put your money to work? Click the button below to get started.</p>
     </Container>
     <img className='investment-image' src={investing} alt={investing} />
-    <LoanRequest />
+    <LoanRequest user={user} onLogIn={onLogIn} onLogOut={onLogOut} />
     <br />
     <Footer />
     </div>

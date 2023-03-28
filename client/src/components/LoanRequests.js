@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button, Col, Row } from "react-bootstrap";
 
-function LoanRequest() {
+function LoanRequest({user, onLogIn, onLogOut}) {
   const [loans, setLoans] = useState([]);
   useEffect(() => {
     // Fetch loans data for the all the users of Peercashew

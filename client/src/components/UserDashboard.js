@@ -19,6 +19,7 @@ function UserDashboard({ user }) {
       });
   }, [user]);
 
+
   function handleDeleteLoan(id) {
     const loanToDelete = loans.find(loan => loan.id === id);
     if (loanToDelete.status === 'Pending') {
@@ -46,6 +47,7 @@ function UserDashboard({ user }) {
       alert('You cannot delete investments that are not in pending status.');
     }
   }
+
 
   return (
     <div>
@@ -80,7 +82,7 @@ function UserDashboard({ user }) {
             <ListGroup>
               {investments?.map(investment => (
                 <ListGroupItem key={investment?.id}>
-                 {investment?.title} ({investment?.status})
+                 {investment?.loan} {investment?.investment_amount} ({investment?.status})
                   {investment?.status === 'Pending' && (
                     <>
                       {' '}
