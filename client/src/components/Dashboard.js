@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import StatusBoard from "./StatusBoard";
+// import StatusBoard from "./StatusBoard";
 import Profile from "./Profile";
 import NavigationBar from "./NavigationBar";
 import Footer from "./Footer";
+import StatusBoard from "./StatusBoard";
 
 function Dashboard({user, onLogIn, onLogOut}) {
   const [activeTab, setActiveTab] = useState("profile");
@@ -34,7 +35,7 @@ function Dashboard({user, onLogIn, onLogOut}) {
         </div>
       </div>
       <div className="tabs">
-        {activeTab === "profile" ? <Profile /> : <StatusBoard />}
+        {activeTab === "profile" ? <Profile /> : <StatusBoard user={user} />}
       </div>
     </div>
     <Footer />

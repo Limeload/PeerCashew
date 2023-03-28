@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Modal } from 'react-bootstrap';
 import loanform from "../images/loanform.png";
 import NavigationBar from './NavigationBar';
 import { Link } from 'react-router-dom';
@@ -13,6 +13,11 @@ function LoanForm({ user, onLogIn, onLogOut }) {
   const [term, setTerm] = useState('');
   const [status, setStatus] = useState('');
   const [loanId, setLoanId] = useState(null);
+
+  // Modal handlers for saved state
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     if (user?.id) {
@@ -42,7 +47,7 @@ function LoanForm({ user, onLogIn, onLogOut }) {
       amount,
       interest_rate: interestRate,
       term_length: term,
-      status: status || 'pending', // set 'pending' as default if status is not provided
+      status: status || 'Pending', // set 'pending' as default if status is not provided
     };
     let requestMethod = 'POST';
     let url = '/loans/' + user.id;
@@ -121,9 +126,21 @@ function LoanForm({ user, onLogIn, onLogOut }) {
           />
         </Form.Group>
         <br />
-        <Button variant="dark" type="submit">
+        <Button variant="dark" type="submit" onClick={handleShow}>
           Submit Application
         </Button>
+        <Modal show={show} onHide={handleClose} animations={false}>
+  <Modal.Header>
+    <Modal.Title>Loan Request Submitted</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    <p>Your loan request has been submitted successfully.</p>
+    <p>An investor will review your request and get back to you soon.</p>
+  </Modal.Body>
+  <Modal.Footer>
+    <Button variant="dark" onClick={handleClose}>Close</Button>
+  </Modal.Footer>
+</Modal>
       </Form>
       <br />
       <div><Link exact to='/loans'>Go Back!</Link></div>

@@ -64,7 +64,7 @@ function App() {
               <Profile user={user} onLogIn={onLogIn} onLogOut={onLogOut} />
             </Route>
             <Route path="/statusBoard">
-            <StatusBoard user={user} onLogIn={onLogIn} onLogOut={onLogOut} />
+            <StatusBoard user={user} />
             </Route>
             <Route path='/loans'>
               <LoanPage user={user} onLogIn={onLogIn} onLogOut={onLogOut} />
@@ -78,6 +78,7 @@ function App() {
             <Route path='/investmentForm'>
               <InvestmentForm user={user} onLogIn={onLogIn} onLogOut={onLogOut} />
             </Route>
+
         </Switch>
       </div>
     </BrowserRouter>

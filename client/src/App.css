@@ -305,9 +305,25 @@ input[type="number"] {
 }
 
 .investment-image{
-  width: 44rem;
+  width: 35rem;
+  float: left;
 }
 
 .investor-image img {
     width: 25rem;
 }
+
+.loans-cards, .status {
+  padding: 3rem 3rem ;
+}
+
+.status {
+  float: right;
+  width: 40rem;
+  margin-left: 5rem;
+}
+
+.dashboard {
+  margin: 4rem 2rem;
+}
+
