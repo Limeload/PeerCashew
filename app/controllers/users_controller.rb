@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authorize, only: [:create, :me, :show, :index, :profile, :investors, :loans]
+  skip_before_action :authorize, only: [:create, :me, :show, :index, :profile, :investors, :loans, :destroy]
 
   # Logged in user's Investors
   def investors
@@ -54,7 +54,9 @@ class UsersController < ApplicationController
   # Delete a user
   def destroy
     user = User.find_by(id: params[:id])
-    user.destroy
+    loans = @user.loans.find(params[:id])
+    loans.destroy
+    redirect_to user_loans_path(user)
   end
 
   private

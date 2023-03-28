@@ -12,12 +12,10 @@ function Profile({ user, onLogOut, onLogIn }) {
   const [address, setAddress] = useState('');
   let history = useHistory();
 
-
   // Modal handlers for saved state
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
 
   useEffect(() => {
       setName(user?.name);
@@ -66,7 +64,6 @@ function Profile({ user, onLogOut, onLogIn }) {
       });
     }
   }
-
 
   return (
     <div className='login-form'>
@@ -134,7 +131,7 @@ function Profile({ user, onLogOut, onLogIn }) {
           <br />
           <Button variant='light' onClick={handleDelete}> Delete Account</Button>
           <Modal show={show} onHide={handleClose} animations={false}>
-            <Modal.Header closeButton>
+            <Modal.Header>
               <Modal.Title>PeerCashew</Modal.Title>
             </Modal.Header>
             <Modal.Body> Your information has been saved!</Modal.Body>

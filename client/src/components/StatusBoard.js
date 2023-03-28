@@ -20,37 +20,36 @@ function StatusBoard({ user }) {
 
   return (
     <div>
-      <h3>Status Board</h3>
-      <div className="d-flex">
+      <div className="status">
         <Card style={{ width: "18rem" }}>
           <Card.Header>Loans</Card.Header>
           <Card.Body>
             <Card.Title>Total: {loans?.length}</Card.Title>
             <Card.Text>
-              <Badge variant="dark">
+              <Badge className="badge bg-dark">
                 {loans?.filter((l) => l.status === "Pending").length} Pending
               </Badge>{" "}
-              <Badge variant="light">
+              <Badge className="badge bg-dark">
                 {loans?.filter((l) => l.status === "Approved").length} Approved
               </Badge>{" "}
-              <Badge variant="warning">
+              <Badge className="badge bg-dark">
                 {loans?.filter((l) => l.status === "Rejected").length} Rejected
               </Badge>{" "}
             </Card.Text>
           </Card.Body>
         </Card>
         <Card style={{ width: "18rem" }}>
-          <Card.Header>Investors</Card.Header>
+          <Card.Header>Investments</Card.Header>
           <Card.Body>
             <Card.Title>Total: {investors?.length}</Card.Title>
             <Card.Text>
-              <Badge variant="dark">
+              <Badge className="badge bg-dark">
                 {investors?.filter((i) => i.status === "Pending").length} Pending
               </Badge>{" "}
-              <Badge variant="light">
+              <Badge className="badge bg-dark">
                 {investors?.filter((i) => i.status === "Active").length} Active
               </Badge>{" "}
-              <Badge variant="warning">
+              <Badge className="badge bg-dark">
                 {investors?.filter((i) => i.status === "Closed").length} Closed
               </Badge>{" "}
             </Card.Text>

@@ -44,8 +44,6 @@ function App() {
     localStorage.removeItem('user');
   }
 
-console.log(user);
-
   return (
     <BrowserRouter>
       <div className="App">
