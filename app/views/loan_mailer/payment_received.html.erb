@@ -1,0 +1,4 @@
+<h1>Payment Recorded</h1>
+<p>Hi <%= @loan.borrower.name %>,</p>
+<p>A payment of <strong>$<%= @payment.amount %></strong> has been recorded for your loan on <%= @payment.paid_date || Date.today %>.</p>
+<p>— The LendSphere Team</p>

@@ -1,167 +1,251 @@
-# **PeerCashew**
+# LendSphere
 
-PeerCashew is a peer-to-peer lending platform that allows borrowers to connect with investors and obtain loans.
+> Open-source peer-to-peer lending platform — connecting borrowers and investors directly.
+
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Ruby](https://img.shields.io/badge/ruby-3.x-red.svg)](https://www.ruby-lang.org/)
+[![Rails](https://img.shields.io/badge/rails-7.x-red.svg)](https://rubyonrails.org/)
+[![React](https://img.shields.io/badge/react-17.x-blue.svg)](https://reactjs.org/)
+[![PostgreSQL](https://img.shields.io/badge/postgresql-14%2B-blue.svg)](https://www.postgresql.org/)
+
+LendSphere is a full-stack web application that lets borrowers post loan requests and investors fund them — no bank in the middle. It is built with a Rails 7 API backend, a React frontend, and a PostgreSQL database.
+
+---
+
+## Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Data Model](#data-model)
+- [API Reference](#api-reference)
+- [Getting Started](#getting-started)
+- [Environment Variables](#environment-variables)
+- [Deployment](#deployment)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
 
 ## Features
 
-- User authentication
-- Loan requests and approvals
-- Investment opportunities
-- Payment processing and tracking
+| Feature | Status |
+|---------|--------|
+| User registration & login (session-based auth) | ✅ |
+| Loan requests (create, browse, update, delete) | ✅ |
+| Investment flow — fund any open loan | ✅ |
+| **Loan status workflow** — `pending → funded → active → repaid / defaulted` | ✅ |
+| **Payment tracking** — schedule, record, and mark payments as paid | ✅ |
+| **Loan filtering & search** — by status, amount range, rate, term | ✅ |
+| **Email notifications** — status changes, new investments, payment reminders | ✅ |
+| User profile — edit details, delete account | ✅ |
+| Dashboard & status board | ✅ |
+| Loan calculator | ✅ |
+| Stripe payment integration | 🔲 stretch goal |
+| Google Maps address verification | 🔲 stretch goal |
 
-## Functionality
+---
 
-- Register an account as either a borrower or an investor.
-- Create a loan request or browse available investment opportunities.
-- Receive loan approval or invest in a loan request.
-- Make and track payments.
+## Tech Stack
 
-## MVP
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React 17, React Router 5, React Bootstrap |
+| Backend | Ruby on Rails 7 (API mode) |
+| Database | PostgreSQL |
+| Auth | `has_secure_password` + cookie-based sessions |
+| Email | ActionMailer (SMTP-configurable) |
+| Deployment | [Render](https://render.com) |
 
-- **Authentication:** Users will be able to sign up and log in to the platform using their email and password.
+---
 
-- **Loan Requests:** Borrowers will be able to create loan requests, specifying the amount they want to borrow and the interest rate they are willing to pay.
+## Data Model
 
-- **Loan Listings:** Lenders will be able to view a list of loan requests and filter them by amount, interest rate, and other criteria.
+```
+users
+  id, email, password_digest, name, date_of_birth, address
 
-- **Loan Investment:** Lenders will be able to invest in loan requests, specifying the amount they want to invest and the interest rate they are willing to accept.
+loans
+  id, borrower_id → users, title, description,
+  amount, interest_rate, term_length,
+  status (pending | funded | active | repaid | defaulted)
 
-- **Payment Processing:** The platform will handle the payment processing for each loan, collecting payments from borrowers and distributing them to lenders.
+investors
+  id, lender_id → users, loan_id → loans,
+  investment_amount, interest_rate, status
 
-- **Dashboard:** Both borrowers and lenders will have a dashboard where they can view the loans they have created or invested in, as well as their payment history.
+payments
+  id, loan_id → loans, payer_id → users,
+  amount, scheduled_date, paid_date, status (scheduled | paid | overdue)
+```
 
-## User Stories
+### Loan Status Transitions
 
-- **As a borrower**, I want to create a loan request on the platform, specifying the amount I want to borrow and the interest rate I am willing to pay.
+```
+pending ──► funded ──► active ──► repaid
+   │            │         │
+   └────────────┴─────────┴──► defaulted
+```
 
-- **As a lender**, I want to view a list of loan requests on the platform, filtered by amount, interest rate, and other criteria.
+---
 
-- **As a lender**, I want to invest in a loan request, specifying the amount I want to invest and the interest rate I am willing to accept.
+## API Reference
 
-- **As a borrower**, I want to see the status of my loan request and receive notifications when lenders invest in it.
+### Auth
+| Method | Path | Description |
+|--------|------|-------------|
+| POST | `/signup` | Register a new user |
+| POST | `/login` | Log in |
+| DELETE | `/logout` | Log out |
+| GET | `/me` | Return the current session user |
 
-- **As a borrower**, I want to make payments on my loan and see my payment history.
+### Users
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/users` | List all users |
+| GET | `/users/:id` | Show a user |
+| PATCH | `/users/:id` | Update a user |
+| DELETE | `/users/:id` | Delete a user |
+| GET | `/users/:id/loans` | Loans belonging to a user |
+| GET | `/users/:id/investors` | Investments belonging to a user |
 
-- **As a lender**, I want to receive payments from borrowers and see my payment history.
+### Loans
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/loans` | List loans (supports `?status=`, `?min_amount=`, `?max_amount=`, `?min_rate=`, `?max_rate=`, `?term_length=`) |
+| POST | `/loans` | Create a loan |
+| GET | `/loans/:id` | Show a loan |
+| PATCH | `/loans/:id` | Update a loan |
+| DELETE | `/loans/:id` | Delete a loan |
+| PATCH | `/loans/:id/transition` | Transition loan status (`{ status: "funded" }`) |
 
-- **As a user**, I want to be able to sign up and log in to the platform using my email and password.
+### Payments
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/loans/:loan_id/payments` | List payments for a loan |
+| POST | `/loans/:loan_id/payments` | Schedule a payment |
+| GET | `/loans/:loan_id/payments/:id` | Show a payment |
+| PATCH | `/loans/:loan_id/payments/:id` | Update a payment (e.g. mark paid) |
+| DELETE | `/loans/:loan_id/payments/:id` | Delete a payment |
 
-- **As a user**, I want to have a dashboard where I can view the loans I have created or invested in, as well as my payment history.
+### Investors
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/investors` | List all investments |
+| POST | `/investors` | Create an investment |
+| GET | `/investors/:id` | Show an investment |
+| PATCH | `/investors/:id` | Update an investment |
+| DELETE | `/investors/:id` | Delete an investment |
 
-## How it works?
+---
 
-Meet Jane, a small business owner who needs to borrow $5,000 to purchase new equipment for her bakery. She visits PeerCashew and creates an account as a borrower. She then fills out an application, providing information about her business, credit history, and the purpose of the loan.
+## Getting Started
 
-PeerCashew uses LinkedIn's Professional Network API to verify Jane's employment information and Stripe's Payment API to process her loan application fee. PeerCashew also runs a credit check on Jane using TransUnion's Credit Check API.
+### Prerequisites
 
-Jane's loan application is approved and listed on the PeerCashew platform for investors to fund. Investors can see the details of the loan, including the purpose, interest rate, and repayment schedule. Investors can then choose to invest in Jane's loan by sending the funds using Stripe's Payment API.
+- Ruby 3.x
+- Rails 7.x (`gem install rails`)
+- Node 16+
+- PostgreSQL 14+
 
-Once the loan is fully funded, the funds are sent to Jane's bank account using Stripe's Payment API. PeerCashew then uses Google Maps' Location and Geocoding API to verify Jane's address and display the location of the loan on a map.
+### 1. Clone the repo
 
-Jane then repays the loan using PeerCashew's Payment API, which automatically deducts the payments from her bank account on the scheduled dates. PeerCashew also sends reminder emails to Jane when her payment is due using SendGrid's Email API.
+```bash
+git clone https://github.com/<your-username>/lendsphere.git
+cd lendsphere
+```
 
-Overall, PeerCashew provides an easy and streamlined process for borrowers like Jane to obtain loans and for investors to fund those loans.
+### 2. Backend setup
 
-## Deployed in Render
+```bash
+bundle install
+rails db:create db:migrate db:seed
+rails s -p 3000
+```
 
-[PeerCashew](https://peercashew.onrender.com)
+The Rails API will be available at `http://localhost:3000`.
 
-## ERD
+### 3. Frontend setup
 
-![PeerCashew](/client/src/images/dbdiagram.png)
+```bash
+cd client
+npm install
+npm start
+```
 
-## Technologies used
+The React app will be available at `http://localhost:4000` and proxies API calls to port 3000.
 
-* React for building the user interface
-* Rails for the backend server
-* Postgresql for the database
-* Stripe for payment processing (*stretch goal*)
-* Google Maps API for location and geocoding
-* SendGrid API for email delivery
-* LinkedIn API for employment verification
-* TransUnion API for credit checks
-* Some icons used in this project are provided by [Storyset](https://storyset.com/).
+### 4. Email (optional, development)
 
+To preview emails locally, add this to `config/environments/development.rb`:
 
-## Figma
+```ruby
+config.action_mailer.delivery_method = :letter_opener
+config.action_mailer.perform_deliveries = true
+```
 
-[PeerCashew](https://www.figma.com/file/bApNTrQgehCpF5246Jo3rj/PeerCashew?node-id=0%3A1&t=t3dkHgLpuDxc83kC-1)
+Then add the `letter_opener` gem to your Gemfile.
 
-## API Routes
+---
 
-The following routes are available in this API:
+## Environment Variables
 
-- **`GET /users`** - list all users
-- **`GET /users/:id`** - show a specific user
-- **`POST /users`** - create a new user
-- **`PUT/PATCH /users/:id`** - update a user
-- **`DELETE /users/:id`** - delete a user
-- **`GET /users/:user_id/loans`** - list all loans for a specific user
-- **`POST /users/:user_id/loans`** - create a new loan for a specific user
-- **`GET /loans/:id`** - show a specific loan
-- **`PUT/PATCH /loans/:id`** - update a loan
-- **`DELETE /loans/:id`** - delete a loan
-- **`GET /loans/:loan_id/investors`** - list all investors for a specific loan
-- **`POST /loans/:loan_id/investors`** - create a new investor for a specific loan
-- **`GET /investors/:id`** - show a specific investor
-- **`PUT/PATCH /investors/:id`** - update an investor
-- **`DELETE /investors/:id`** - delete an investor
+| Variable | Description |
+|----------|-------------|
+| `DATABASE_URL` | Full PostgreSQL connection URL (production) |
+| `LENDSPHERE_DATABASE_PASSWORD` | DB password (production) |
+| `RAILS_MASTER_KEY` | Decrypts `config/credentials.yml.enc` |
+| `RAILS_LOG_TO_STDOUT` | Set to `true` on Render / Heroku |
+| `RAILS_SERVE_STATIC_FILES` | Set to `true` to serve the React build |
+| `SMTP_HOST` | SMTP server host for ActionMailer |
+| `SMTP_PORT` | SMTP server port |
+| `SMTP_USER` | SMTP username |
+| `SMTP_PASSWORD` | SMTP password |
 
-*STRETCH GOALS*
-- **`POST /payments`** - create a new payment record
-- **`POST /payments/:id`** - could update an existing payment record.
+---
 
+## Deployment
 
- *PeerCashew, will utilize a range of complex APIs to deliver a comprehensive and seamless solution for both borrowers and lenders. Some of the key APIs that our app will interact with include:*
+LendSphere is configured for [Render](https://render.com).
 
-* **Stripe Payment API:** This API will enable us to handle payment processing and fund transfers efficiently.
+1. Set all environment variables in Render's dashboard.
+2. Build command: `bundle install && rails db:migrate && cd client && npm install && npm run build`
+3. Start command: `bundle exec puma -C config/puma.rb`
 
-* **Google Maps Location and Geocoding API:** With this API, we will verify the borrower and lender addresses and display the loan and investment locations on a map.
+Live demo: [https://lendsphere.onrender.com](https://lendsphere.onrender.com)
 
-* **LinkedIn Professional Network API:** This API will allow us to verify the employment and income information of borrowers to ensure their eligibility for loans.
+---
 
-* **TransUnion Credit Check API:** To run credit checks on borrowers, our app will interact with this API.
+## Roadmap
 
-* **SendGrid Email API:** Our app will use this API to send emails to both borrowers and lenders.
+- [ ] Stripe payment integration
+- [ ] Google Maps address verification
+- [ ] Real-time chat between borrower and investor (Action Cable)
+- [ ] Secondary market — sell investments to other investors
+- [ ] Machine learning credit scoring
+- [ ] Mobile app (React Native)
+- [ ] Multi-currency support
 
-By leveraging these APIs, PeerCashew will offer a streamlined and user-friendly experience for all parties involved.
-
-
-## Stretch goals
-
-* Integrate a chat feature to allow borrowers and lenders to communicate in real-time.
-
-* Add a feature that allows borrowers to apply for loans with a co-signer.
-
-* Implement a referral program that rewards borrowers and investors for referring new users to the platform.
-
-* Implement a secondary market feature that allows investors to sell their investment to other investors.
-
-* Use machine learning to analyze borrower data and predict their likelihood of defaulting on a loan.
-
-* Offer borrowers the ability to apply for loans in different currencies.
-
-* Implement a mobile app to allow borrowers and investors to manage their accounts on-the-go.
-Expand the platform to include personal loans and credit lines.
-
-* Partner with credit bureaus and financial institutions to expand the range of financial data available for credit analysis.
-
-* Develop a credit scoring system to help borrowers improve their creditworthiness and increase their chances of being approved for loans.
+---
 
 ## Contributing
 
-We welcome contributions from the community. To contribute, please follow these steps:
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) first.
 
-- Fork the repository.
-- Create a new branch for your changes.
-- Make your changes and commit them.
-- Push your changes to your fork.
-- Create a pull request.
+1. Fork the repo
+2. Create your branch: `git checkout -b feature/my-feature`
+3. Commit your changes: `git commit -m 'Add my feature'`
+4. Push: `git push origin feature/my-feature`
+5. Open a Pull Request
 
-Please follow our code standards and ensure that all tests pass before submitting a pull request.
+Please follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 
-## Copyright © 2023 Shraddha Rao
+---
 
-*All content in this project, including but not limited to text, images, code, and documentation, is the property of the project owners and contributors. Any form of plagiarism, including copying or reproducing any part of this project without proper attribution, is strictly prohibited and may result in legal action. We respect the intellectual property rights of others and expect the same from anyone who uses or contributes to this project.*
+## License
 
+Distributed under the MIT License. See [LICENSE](LICENSE) for details.
 
+---
+
+*Built with care by [Shraddha Rao](https://github.com/Limeload)*

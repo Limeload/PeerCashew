@@ -1,31 +1,26 @@
 Rails.application.routes.draw do
-  # Routes for users
-  resources :users, only: [] do
-    get :loans, on: :member
+  # Auth
+  post   "/signup", to: "users#create"
+  get    "/me",     to: "users#me"
+  post   "/login",  to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
+  get    "/profile", to: "users#profile"
+
+  # Users — nested loan/investor reads
+  resources :users, only: [:index, :show, :update, :destroy] do
+    get :loans,     on: :member
     get :investors, on: :member
   end
-  get '/users/:user_id/loans', to: 'loans#index'
-  get '/users/:user_id/investors', to: 'investors#index'
-  resources :users
 
-  scope '/users/:id' do
-    resources :loans, only: [:new, :create, :edit, :update, :destroy]
-    resources :investors, only: [:new, :create, :update, :destroy]
+  # Loans — with status transition and nested payments
+  resources :loans do
+    patch :transition, on: :member
+    resources :payments
   end
-  # Routes for sessions
-  post "/signup", to: "users#create"
-  get "/me", to: "users#me"
-  post "/login", to: "sessions#create"
-  delete "/logout", to: "sessions#destroy"
-  get '/profile', to: 'users#profile'
-  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 
-  # Routes for loans
-  resources :loans
-  get '/loans/:id', to: 'loans#show'
-  post '/loans/:id', to: 'loans#create'
-  # Routes for investors
+  # Investors
   resources :investors
-  get '/investors/:id', to: 'investors#show'
-  post '/investors/:id', to: 'investors#create'
+
+  # SPA fallback (must be last)
+  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end

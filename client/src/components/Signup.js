@@ -47,7 +47,7 @@ function Signup({ onLogIn }) {
   return (
     <div className="login-form">
     <div className='form'>
-    <Link className='link' exact to='/'><h1>PeerCashew</h1></Link>
+    <Link className='link' exact to='/'><h1>LendSphere</h1></Link>
     <br />
 <h5 className='text-1'>Create an Account</h5>
 <Form onSubmit={handleSubmit}>

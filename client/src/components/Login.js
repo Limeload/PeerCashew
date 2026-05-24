@@ -41,7 +41,7 @@ function Login({ onLogIn }) {
   return (
     <div className="login-form">
             <div className='form'>
-            <Link className='link' exact to='/'><h1>PeerCashew</h1></Link>
+            <Link className='link' exact to='/'><h1>LendSphere</h1></Link>
             <br />
         <h5 className='text-1'>WELCOME BACK!</h5>
         {error && <p className="error">{error}</p>}

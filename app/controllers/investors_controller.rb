@@ -20,6 +20,7 @@ class InvestorsController < ApplicationController
   def create
     investor = Investor.create!(investor_params)
     investor.lender_id = @current_user.id
+    LoanMailer.investment_received(investor.loan, investor).deliver_later
     render json: investor, status: :created
   end
 

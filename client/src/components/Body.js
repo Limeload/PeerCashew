@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 function Body() {
     return (
         <div className="body">
-            <h1>Why Choose PeerCashew?</h1>
+            <h1>Why Choose LendSphere?</h1>
             <h6>Discover the benefits of using our platform</h6>
             <Container>
                 <Row>
@@ -42,7 +42,7 @@ function Body() {
                     <Col md={4}>
                         <div className="card">
                             <h5>Exceptional Customer Support</h5>
-                            <p>Our dedicated customer support team is available to answer any questions or concerns you may have throughout your experience with PeerCashew.</p>
+                            <p>Our dedicated customer support team is available to answer any questions or concerns you may have throughout your experience with LendSphere.</p>
                         </div>
                     </Col>
                 </Row>

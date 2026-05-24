@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_14_194017) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_15_000001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,8 +31,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_194017) do
     t.decimal "amount", precision: 10, scale: 2, null: false
     t.decimal "interest_rate", precision: 4, scale: 2, null: false
     t.integer "term_length", null: false
-    t.string "status"
+    t.string "status", default: "pending"
     t.index ["borrower_id"], name: "index_loans_on_borrower_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.bigint "loan_id", null: false
+    t.bigint "payer_id", null: false
+    t.decimal "amount", precision: 10, scale: 2, null: false
+    t.date "scheduled_date", null: false
+    t.date "paid_date"
+    t.string "status", default: "scheduled", null: false
+    t.index ["loan_id"], name: "index_payments_on_loan_id"
+    t.index ["payer_id"], name: "index_payments_on_payer_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -46,4 +57,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_194017) do
   add_foreign_key "investors", "loans"
   add_foreign_key "investors", "users", column: "lender_id"
   add_foreign_key "loans", "users", column: "borrower_id"
+  add_foreign_key "payments", "loans"
+  add_foreign_key "payments", "users", column: "payer_id"
 end

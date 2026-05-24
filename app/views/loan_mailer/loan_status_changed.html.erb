@@ -1,0 +1,13 @@
+<h1>Your loan status has been updated</h1>
+<p>Hi <%= @borrower.name %>,</p>
+<p>Your loan request has moved to <strong><%= @loan.status.capitalize %></strong>.</p>
+<% if @loan.status == "funded" %>
+  <p>Great news — your loan has been fully funded! Funds will be disbursed shortly.</p>
+<% elsif @loan.status == "active" %>
+  <p>Your loan is now active. Please make your scheduled payments on time.</p>
+<% elsif @loan.status == "repaid" %>
+  <p>Congratulations! Your loan has been fully repaid. Thank you for using LendSphere.</p>
+<% elsif @loan.status == "defaulted" %>
+  <p>Your loan has been marked as defaulted. Please contact support if you have questions.</p>
+<% end %>
+<p>— The LendSphere Team</p>

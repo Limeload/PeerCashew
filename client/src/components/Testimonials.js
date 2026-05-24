@@ -4,11 +4,11 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 const testimonials = [
   {
     name: 'John Doe',
-    text: 'PeerCashew has helped me get the funds I needed to start my own business. The platform is easy to use and the customer support is top-notch!',
+    text: 'LendSphere has helped me get the funds I needed to start my own business. The platform is easy to use and the customer support is top-notch!',
   },
   {
     name: 'Mike Johnson',
-    text: 'I used PeerCashew to refinance my student loans and was impressed with the rates and terms offered. The platform was easy to use, and the support team was responsive and helpful.',
+    text: 'I used LendSphere to refinance my student loans and was impressed with the rates and terms offered. The platform was easy to use, and the support team was responsive and helpful.',
   },
   // add more testimonials here
 ];
@@ -30,7 +30,7 @@ function Testimonial(){
         <Row>
           <Col>
             <h2 className="testimonial-heading">What Our Customers Say</h2>
-            <p className="testimonial-subtitle">Don't just take our word for it, here's what our happy customers have to say about PeerCashew!</p>
+            <p className="testimonial-subtitle">Don't just take our word for it, here's what our happy customers have to say about LendSphere!</p>
           </Col>
         </Row>
         <Row className="testimonial-row">

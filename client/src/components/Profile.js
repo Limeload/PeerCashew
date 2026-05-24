@@ -132,7 +132,7 @@ function Profile({ user, onLogOut, onLogIn }) {
           <Button variant='light' onClick={handleDelete}> Delete Account</Button>
           <Modal show={show} onHide={handleClose} animations={false}>
             <Modal.Header>
-              <Modal.Title>PeerCashew</Modal.Title>
+              <Modal.Title>LendSphere</Modal.Title>
             </Modal.Header>
             <Modal.Body> Your information has been saved!</Modal.Body>
             <Modal.Footer>
